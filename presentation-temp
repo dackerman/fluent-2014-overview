@@ -1,0 +1,101 @@
+* Presentation Layout
+  * Skim FluentConf topics
+  * Ecmascript 6
+    * What is it
+    * Cool new features
+  * Web Components
+    * How Current WebApps work
+    * What's wrong with them
+    * How Web Components solves this problem
+    * A couple cool demos
+------------------------------------------------------------------
+
+
+Skim FluentConf topics
+------------------------------------------------------------------
+  * FluentConf
+  * Broad Topics
+    * New ES6 features (various features)
+    * Web Components
+    * Framework topics (Angular, React, Ember, Meteor, etc)
+    * Perf/Security topics
+    * Focused SVG, D3, Sass
+    * Handling team dynamics, maintaining code
+------------------------------------------------------------------
+
+
+ECMAScript 6 (a.k.a. ECMAScript Harmony)
+------------------------------------------------------------------
+* What is it
+  * Next version of JavaScript
+  * Not a completed spec (current is ECMAScript 5.1)
+  * Can't use it in production
+    * Can use some features if compiled down to ES5
+    * i.e. Google <a href="https://github.com/google/traceur-compiler">Traceur Compiler</a>
+* Cool Features (https://github.com/google/traceur-compiler/wiki/LanguageFeatures)
+  * Array Comprehension
+  * Arrow Functions
+  * Classes
+  * Default Parameters
+  * Destructuring Assignment
+  * Iterators
+  * Generators
+  * Modules
+  * var-args
+  * Spread
+  * Template Literals
+------------------------------------------------------------------
+
+
+Web Components
+------------------------------------------------------------------
+  * How Current WebApps work
+    * Core "tenant"
+      * Separate presentation from business logic
+      * Presentation = HTML/ CSS
+      * Business Logic = JavaScript
+    * What do you usually end up with?
+      * Explain how CSS/HTML/JavaScript is laid out
+    * How do you reuse pieces of your app?
+    * How do you know what depends on what?
+
+  * Enter Web Components
+    * What does Web Components <em>mean</em>?
+      * A concept
+      * A set of standards
+
+    * What makes up "Web Components"?
+      * Templates
+      * Custom Elements
+      * Shadow DOM
+      * HTML Imports
+
+  * Custom Elements
+    * [example code]
+
+  * Shadow DOM
+    * [example code]
+
+  * HTML Imports
+    * [example code]
+
+  * These APIs are evolving
+    * Will change over time
+    * Not compatible with even evergreen browsers currently
+
+
+
+
+
+
+
+    * <a href="/examples/dismissable">Go to example</a>
+------------------------------------------------------------------
+
+
+End
+------------------------------------------------------------------
+* Useful Links
+    * <a href="http://www.polymer-project.org/">Polymer Library</a>
+    * <a href="http://shop.oreilly.com/product/110000139.do">FluentConf YouTube compilation</a>
+    * <a href="http://fluentconf.com/fluent2014/public/schedule/proceedings">FluentConf Slides and Video</a>
