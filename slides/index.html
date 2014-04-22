@@ -112,13 +112,21 @@
                         <h1>ECMAScript 6 (Harmony)</h1>
                     </section>
                     <section>
+                        <h2>What is ECMAScript 6?</h2>
+                        <ul>
+                            <li>New ECMA-262 version</li>
+                            <li>Defines "JavaScript"</li>
+                            <li>ES6 adds many modern language features</li>
+                        </ul>
+                    </section>
+                    <section>
                         <h2>Cool ECMAScript 6 Features</h2>
                         <ul>
                             <li>Array Comprehension</li>
                             <li>Arrow Functions</li>
                             <li>Default Parameters</li>
                             <li>Destructuring Assignment</li>
-                            <li>Iterators & Generators</li>
+                            <li>Iterators &amp; Generators</li>
                             <li>Modules</li>
                     </section>
                     <section>
@@ -181,10 +189,12 @@ var y = aPoint.y;
 // ES6
 var aPoint = {x: 123, y: 456};
 var {x, y} = aPoint;
+var {topLeft: {x: x1, y: y1}, bottomRight: {x: x2, y: y2}} = rect;
+var rect = {topLeft: {x: 1, y: 2}, bottomRight: {x: 3, y: 4}};
 </code></pre>
                     </section>
                     <section>
-                        <h2>Iterators & Generators</h2>
+                        <h2>Iterators &amp; Generators</h2>
                         <pre><code class="js" data-trim>
 // previously
 ...?
@@ -237,11 +247,26 @@ expect(externalVar).toBe('ab');
 </code></pre>
                     </section>
                     <section>
+                        <h2>Learn more</h2>
+                        <ul>
+                            <li><a href="https://github.com/google/traceur-compiler/wiki/LanguageFeatures">More Features and detail</a></li>
+                        </ul>
+                    </section>
+                    <section>
                         <h2>Cool Stuff! But...</h2>
                         <ul>
-                            <li class="fragment">Bad news: can't be used in production!</li>
+                            <li class="fragment">Can't be used in production!</li>
                             <li class="fragment">Target ES6 "Release" date: <b>December 2014</b></li>
-                            <li class="fragment">Full browser support likely to take longer!</li>
+                            <li class="fragment">Old browsers still won't have it!</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>What to do?</h2>
+                        <ul>
+                            <li class="fragment"><a href="https://github.com/google/traceur-compiler">Google Traceur Compiler</a></li>
+                            <li class="fragment">Compiles ES6 code into ES5</li>
+                            <li class="fragment">Online and offline compilation</li>
+                            <li class="fragment">Subject to many changes, still not good for production!</li>
                         </ul>
                     </section>
                 </section>
@@ -380,7 +405,7 @@ var fooTheBar = function(bar) {
                     </section>
                     <section>
                         <h2>Shadow DOM <small>(example)</small></h2>
-                        <p>With Shadow DOM, view source and see<pre><code>
+                        <p>With Shadow DOM, view source and see<pre><code class="xml">
 <code type="javascript">
   var fooTheBar = function(bar) {
     return 'foo' + bar;
@@ -408,26 +433,100 @@ var fooTheBar = function(bar) {
                     </section>
                     <section>
                         <h2>Custom Elements</h2>
+                        <ul>
+                            <li>Gives HTML appear to have more functionality</li>
+                            <li>Define new tags with custom behavior</li>
+                            <li>Lifecycle events to control the element</li>
+                            <li>Get events when properties change</li>
+                        </ul>
+                        <p><pre><code>
+var XFooProto = Object.create(HTMLElement.prototype, {
+    bar: {
+      get: function() { return 5; }
+    },
+    foo: {
+      value: function() {
+        alert('foo() called');
+      }
+    }
+  });
+
+XFooProto.createdCallback = function() {
+  this.innerHTML = "<b>Testing 123!</b>";   
+};
+
+var XFoo = document.registerElement('x-foo', {
+  prototype: XFooProto
+});
+
+</code></pre></p>
                     </section>
 <section data-background="no-repeat center url('http://www.polymer-project.org/images/logos/p-logo.svg')">
-                        <h2>Polymer</h2>
+                        <h2><a href="http://www.polymer-project.org/">Polymer</a></h2>
                         <ul>
                             <li>Library putting all these technologies together</li>
                             <li>Works as a polyfill for tech until it's a standard</li>
                             <li>Library shrinks as more standards are implemented</li>
+                            <li>Makes these standards easier to use</li>
                         </ul>
                     </section>
                     <section>
-                        <h2>Some neat examples</h2>
-                        <p><a href="/examples/github">Automatic JSON download into templates</a></p>
+                        <h2>Polymer Custom Elements</h2>
                         <ul>
+                            <li>Gives HTML appear to have more functionality</li>
+                            <li>Define new tags with custom behavior</li>
+                            <li>Lifecycle events to control the element</li>
+                            <li>Get events when properties change</li>
+                        </ul>
+                        <p><pre><code>
+<polymer-element name="x-foo" attributes="bar">
+  <template>
+    <b>Testing 123!</b>
+  </template>
+  &lt;script&gt;
+    Polymer('x-foo', {
+      bar: 5,
+      foo: function() {
+        alert('foo() called');
+      }
+    });
+  &lt;/script&gt;
+</polymer-element>
+</code></pre></p>
+                    </section>
+                    <section>
+                        <h2>Some neat examples</h2>
+                        <ul>
+                            <li><a href="/examples/dismissable">Raw templates</a></li>
+                            <li><a href="/examples/github">Polymer codeless JSON download into templates</a></li>
                             <li><em>Note: </em> these APIs are evolving
                                 <ul>
                                     <li>Aren't standards yet</li>
-                                    <li>Need to enable some settings in <code>about://chrome</code></li>
+                                    <li>Need to enable settings in <code>chrome://flags</code>
+                                        <ul>
+                                            <li><a target="_window" href="chrome://flags/#enable-experimental-web-platform-features">Enable experimental Web Platform features</a></li>
+                                            <li><a target="_window" href="chrome://flags/#enable-html-imports">Enable HTML Imports</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
+                    </section>
+                    <section>
+                        <h2>Wrap Up</h2>
+                        <ul>
+                            <li>New tech is exciting!</li>
+                            <li>Can't use it in serious apps yet</li>
+                            <li>It's good to be prepared!</li>
+                        </ul>
+                        <p class="fragment">
+                            <br/>
+                            Now <em>you too</em> can be a <b>Web Components hipster!</b>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Questions?</h2>
+                        <img src="img/hipster.jpg"/>
                     </section>
                 </section>
 			</div>
@@ -446,7 +545,7 @@ var fooTheBar = function(bar) {
 				history: true,
 				center: true,
 
-				theme: 'night', // available themes are in /css/theme
+				//theme: 'night', // available themes are in /css/theme
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling

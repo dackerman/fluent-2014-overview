@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
   <head>
-    <script type='text/javascript' id='lt_ws' src='http://localhost:45514/socket.io/lighttable/ws.js'></script>
     <title>Web Components in Action - Shadow DOM Dismissable Exercise</title>
 
     <style>
@@ -23,9 +22,7 @@
         interesting, so instead we won't.</p>
     </div>
 
-    <div class="dismissable" title="Yawn...">This content is boring, but you'll just have to live with it. No dismissal!</div>
-
-    <!----- DO NOT EDIT ABOVE THIS LINE ------>
+    <div title="Yawn...">This content is boring, but you'll just have to live with it. No dismissal!</div>
 
     <template id="dismissable-template">
       <style>
@@ -67,10 +64,6 @@
       var template = document.querySelector('#dismissable-template');
 
       [].forEach.call(document.querySelectorAll(".dismissable"), function(dismissable) {
-        if (dismissable === undefined) {
-          console.log("wtf");
-          return;
-        }
         var shadow = dismissable.createShadowRoot();
         shadow.appendChild(document.importNode(template.content, true));
         shadow.querySelector('#title').textContent = dismissable.title;

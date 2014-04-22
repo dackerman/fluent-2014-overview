@@ -1,0 +1,59 @@
+<link rel="import" href="/examples/bower_components/polymer/polymer.html">
+<link rel="import" href="/examples/bower_components/polymer-ajax/polymer-ajax.html">
+
+<polymer-element name="github-user" attributes="login" noscript>
+<!-- Credit to Michael Bleigh for this one: https://github.com/mbleigh -->
+  <template>
+    <style>
+      .card {
+        font-family: sans-serif;
+        background: #eee;
+        padding: 8px;
+        height: 64px;
+        width: 260px;
+        display: block;
+      }
+      img { float: left; margin-right: 10px; }
+      .name { font-size: 24px; display: block; font-weight: bold; }
+      a { color: #333; text-decoration: none; }
+      .location { font-size: 18px; color: #aaa; display: block; }
+
+    </style>
+    <polymer-ajax auto url="https://api.github.com/users/{{login}}" handleAs="json" response="{{user}}"></polymer-ajax>
+    <template bind if="{{user}}">
+        <div class="card"><a href="{{user.html_url}}" target="_blank">
+            <img src="{{user.avatar_url}}" width="64" height="64">
+            <span class="name">{{user.login}}</span>
+            <span class="location">{{user.location}}</span>
+    </a></div></template>
+  </template>
+</polymer-element>
+
+<polymer-element name="github-user-adder" attributes="outputDiv">
+  <template>
+    <input type="text" placeholder="Github username" value="{{username}}" on-keypress="{{submitOnEnter}}" />
+    <button on-click="{{addUser}}">Add User</button>
+    <button on-click="{{clearUsers}}">Clear Users</button>
+  </template>
+  <script>
+  Polymer('github-user-adder', {
+    username: "",
+    submitOnEnter: function(event, detail, sender) {
+      if (event.keyCode === 13) {
+        this.addUser();
+      }
+    },
+    addUser: function(event, detail, sender) {
+      if (this.username) {
+        var newUser = document.createElement('github-user');
+        newUser.setAttribute('login', this.username);
+        document.querySelector(this.outputDiv).appendChild(newUser);
+        this.username = "";
+      }
+    },
+    clearUsers: function(event, detail, sender) {
+      document.querySelector(this.outputDiv).innerHTML = "";
+    }
+  });
+  </script>
+</polymer-element>
