@@ -1,0 +1,18 @@
+{
+  "name": "code-mirror",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.2.3"
+  },
+  "version": "0.2.3",
+  "homepage": "https://github.com/Polymer/code-mirror",
+  "_release": "0.2.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.3",
+    "commit": "830b59fe59c3d9871788c5e606dd9e859ffe8426"
+  },
+  "_source": "git://github.com/Polymer/code-mirror.git",
+  "_target": "~0.2.1",
+  "_originalSource": "Polymer/code-mirror"
+}

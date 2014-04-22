@@ -30,6 +30,12 @@
       theDiv.innerHTML = hljs.highlight('xml', theDiv.innerHTML);
     });
 
+    [].forEach.call(document.querySelectorAll( 'pre div.js' ), function(theDiv) {
+      //process(theDiv);
+      console.log('highlighting javascript');
+      theDiv.innerHTML = hljs.highlight('javascript', theDiv.innerHTML);
+    });
+
 	}
 })();
 // END CUSTOM REVEAL.JS INTEGRATION
