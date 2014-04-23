@@ -19,7 +19,8 @@
       .location { font-size: 18px; color: #aaa; display: block; }
 
     </style>
-    <polymer-ajax auto url="https://api.github.com/users/{{login}}" handleAs="json" response="{{user}}"></polymer-ajax>
+      <polymer-ajax auto url="https://github.guidewire.com/api/v3/users/{{login}}" handleAs="json" response="{{user}}"></polymer-ajax>
+    <!-- <polymer-ajax auto url="https://api.github.com/users/{{login}}" handleAs="json" response="{{user}}"></polymer-ajax> -->
     <template bind if="{{user}}">
         <div class="card"><a href="{{user.html_url}}" target="_blank">
             <img src="{{user.avatar_url}}" width="64" height="64">

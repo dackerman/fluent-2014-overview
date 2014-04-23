@@ -62,16 +62,15 @@
                         <li class="fragment">
                             <h3>ECMAScript 6</h3>
                             <ul>
-                                <li>What is it</li>
+                                <li>What is it?</li>
                                 <li>Cool new Features</li>
                             </ul>
                         </li>
                         <li class="fragment">
                             <h3>Web Components</h3>
                             <ul>
-                                <li>How current webapps work</li>
-                                <li>Some problems with them</li>
-                                <li>How Web Components addresses these problems</li>
+                                <li>Problems with the current state of Web Apps</li>
+                                <li>How we can address them with Web Components</li>
                                 <li>A couple cool demos</li>
                             </ul>
                         </li>
@@ -226,6 +225,7 @@ expect(result).toEqual([4, 5, 6, 7, 8, 9, 10]);
                     <section>
                         <h2>Modules</h2>
                         <pre><code class="js" data-trim>// previously
+// (SomeLibrary.js)
 var SomeLibrary = (function() {
   var internalVar = 'a';
 
@@ -234,7 +234,11 @@ var SomeLibrary = (function() {
   };
 })();
 
+// (Main.js)
 expect(SomeLibrary.externalVar).toBe('ab');
+</code></pre><pre><code class="xml" data-trim>&lt;!-- (in index.html) --&gt;
+&lt;script src="SomeLibrary.js"&gt;&lt;/script&gt;
+&lt;script src="Main.js"&gt;&lt;/script&gt;
 </code></pre><div class="fragment"><pre><code class="js" data-trim>// ES6
 // (SomeLibrary.js)
 var internalVar = 'a';
@@ -356,6 +360,24 @@ async function asyncValue(value) {
                         </p>
                     </section>
                     <section>
+                        <h1>Enter Web Components</h1>
+                    </section>
+                    <section>
+                        <h2>Put HTML, CSS, and JavaScript all together</h2>
+                        <ul>
+                            <li>Self contained, encapsulated</li>
+                            <li>Easily reused</li>
+                            <li>Can work in isolation</li>
+                            <li>Import other components in a one-liner</li>
+                            <li>What about separating presentation and business logic?
+                                <ul class="fragment">
+                                    <li>Each language still has its purpose</li>
+                                    <li>Encapsulation and cohesiveness is important</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
                         <h2>Using a Popup library</h2>
                         <p>Messy HTML<pre><code class="xml">&lt;div class="popup-panel"&gt;
   &lt;div class="header"&gt;
@@ -367,31 +389,13 @@ async function asyncValue(value) {
 </code></pre></p>
                     <p>There's no <em>encapsulation</em> of HTML structure...</p>
                         <div class="fragment">
-                            <p>Wouldn't this be nicer?<pre>
+                            <p>With Web Components<pre>
 <code class="xml" data-trim>&lt;popup closeable="true" header="Header Content"&gt;
     Some content
 &lt;/popup&gt;
 </code></pre>
                             </p>
                         </div>
-                    </section>
-                    <section>
-                        <h1>Enter Web Components</h1>
-                    </section>
-                    <section>
-                        <h2>Put HTML, CSS, and JavaScript all together</h2>
-                        <ul>
-                            <li>Self contained, encapsulated</li>
-                            <li>Easily reused</li>
-                            <li>Can work in isolation</li>
-                            <li>Import other components in a one-liner</li>
-                            <li>What about separating presentation and business logic?
-                                <ul>
-                                    <li>We're still using HTML/CSS/JS for their respective roles</li>
-                                    <li>What we really want is better organization and encapsulation</li>
-                                </ul>
-                            </li>
-                        </ul>
                     </section>
                     <section>
                         <p>So, what <em><b>are</b></em></p>
@@ -429,11 +433,13 @@ async function asyncValue(value) {
                         <ul>
                             <li>Separate DOM from the main one</li>
                             <li>Used for all the presentation-specific HTML</li>
+                            <li>Prevents accidental overriding of CSS or unintended Javascript behavior</li>
                             <li>Leaves regular DOM nice and clean</li>
+                            <li>Allows for HTML <em>encapsulation</em></li>
                         </ul>
                     </section>
                     <section>
-                        <h2>Shadow DOM <small>(example)</small></h2>
+                        <h2>No Shadow DOM <small></small></h2>
                         <p>Using <code>highlight.js</code> to render code in HTML<pre><code>var fooTheBar = function(bar) {
   return 'foo' + bar;
 };
@@ -446,8 +452,8 @@ async function asyncValue(value) {
 </code></pre>
                     </section>
                     <section>
-                        <h2>Shadow DOM <small>(example)</small></h2>
-                        <p>With Shadow DOM, view source and see<pre><code class="xml">&lt;code type="javascript"&gt;
+                        <h2>With Shadow DOM <small>(example)</small></h2>
+                        <p>View source and see<pre><code class="xml">&lt;code type="javascript"&gt;
   var fooTheBar = function(bar) {
     return 'foo' + bar;
   };
@@ -460,9 +466,10 @@ async function asyncValue(value) {
                     <section>
                         <h2>HTML Imports</h2>
                         <ul>
-                            <li>Let you fetch an HTML document like we currently do CSS or images</li>
+                            <li>Lets you fetch an HTML document like we currently do CSS or images</li>
                             <li>Can themselves have imports, which are fetched recursively</li>
                             <li>Can define styles, templates, etc</li>
+                            <li>HTML imports become your "dependencies"</li>
                         </ul>
                         <p><pre>
 <code class="xml" data-noescape data-trim>&lt;link rel="import" href="header.html" id="header-import"&gt;
@@ -475,8 +482,9 @@ async function asyncValue(value) {
                     <section>
                         <h2>Custom Elements</h2>
                         <ul>
-                            <li>HTML appears to have more functionality</li>
+                            <li>Ties everything together</li>
                             <li>Tags can have custom behavior</li>
+                            <li>Indistinguishable from native elements like &lt;input&gt;</li>
                             <li>Lifecycle events can control the element</li>
                             <li>Events fire when properties change</li>
                         </ul>
@@ -492,7 +500,7 @@ async function asyncValue(value) {
   });
 
 XFooProto.createdCallback = function() {
-  this.innerHTML = "<b>Testing 123!</b>";   
+  this.innerHTML = "<b>Testing 123!</b>";
 };
 
 var XFoo = document.registerElement('x-foo', {
@@ -562,9 +570,10 @@ var XFoo = document.registerElement('x-foo', {
                     <section>
                         <h2>Wrap Up</h2>
                         <ul>
+                            <li>FluentConf was awesome</li>
                             <li>New tech is exciting!</li>
                             <li>Can't use it in serious apps yet</li>
-                            <li>It's good to be prepared!</li>
+                            <li>But, it's good to be prepared!</li>
                         </ul>
                         <p class="fragment">
                             <br/>
@@ -586,7 +595,7 @@ var XFoo = document.registerElement('x-foo', {
 
         var highlightEverything = function(hljs) {
             var hljs_nodes = document.querySelectorAll( 'pre code.auto' );
-        
+
             var escapeThings = function(element) {
                 // Now escape html unless prevented by author
                 if( ! element.hasAttribute( 'data-noescape' )) {
