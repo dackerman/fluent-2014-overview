@@ -21,7 +21,8 @@
 		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+        <link rel="stylesheet" href="plugin/highlight2/styles/monokai.css">
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
@@ -56,7 +57,7 @@
                     <h1>Agenda</h1>
                     <ol style="text-align:left">
                         <li class="fragment">
-                            <h3>Skim FluentConf topics</h3>
+                            <h3>Skim FluentConf themes</h3>
                         </li>
                         <li class="fragment">
                             <h3>ECMAScript 6</h3>
@@ -69,8 +70,8 @@
                             <h3>Web Components</h3>
                             <ul>
                                 <li>How current webapps work</li>
-                                <li>What's wrong with them</li>
-                                <li>How Web Components solves this problem</li>
+                                <li>Some problems with them</li>
+                                <li>How Web Components addresses these problems</li>
                                 <li>A couple cool demos</li>
                             </ul>
                         </li>
@@ -79,7 +80,7 @@
                 <section>
                     <section>
                         <h2>FluentConf</h2>
-                        <h3>Topics</h3>
+                        <h3>Themes</h3>
                         <ul>
                             <li>New ES6 features</li>
                             <li>Web Components</li>
@@ -114,15 +115,15 @@
                     <section>
                         <h2>What is ECMAScript 6?</h2>
                         <ul>
-                            <li>New ECMA-262 version</li>
-                            <li>Defines "JavaScript"</li>
+                            <li>New ECMA-262 revision</li>
+                            <li>Defines "JavaScript" as we know it</li>
                             <li>ES6 adds many modern language features</li>
                         </ul>
                     </section>
                     <section>
                         <h2>Cool ECMAScript 6 Features</h2>
                         <ul>
-                            <li>Array Comprehension</li>
+                            <li>Array Comprehensions</li>
                             <li>Arrow Functions</li>
                             <li>Default Parameters</li>
                             <li>Destructuring Assignment</li>
@@ -131,16 +132,14 @@
                     </section>
                     <section>
                         <h2>Array Comprehension</h2>
-                        <pre><code class="js" data-trim>
-// previously
+                        <pre><code class="js" data-trim>// previously
 var out = [];
 [0, 1, 2].forEach(function(x) {
   [0, 1, 2].forEach(function(y) {
     out.push(x + '' + y);
   });
 });
-
-// ES6
+</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
 var array = [for (x of [0, 1, 2]) for (y of [0, 1, 2]) x + '' + y];
 expect(array).to.be.eql([
   '00', '01', '02', '10', '11', '12', '20', '21', '22'
@@ -149,13 +148,11 @@ expect(array).to.be.eql([
                     </section>
                     <section>
                         <h2>Arrow Functions</h2>
-                        <pre><code class="js" data-trim>
-// previously
+                        <pre><code class="js" data-trim>// previously
 var square = function(x) {
   return x * x;
 };
-
-// ES6
+</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
 var square = (x) => {
   return x * x;
 };
@@ -164,15 +161,13 @@ var square2 = x => x * x;
                     </section>
                     <section>
                         <h2>Default Parameters</h2>
-                        <pre><code class="js" data-trim>
-// previously
+                        <pre><code class="js" data-trim>// previously
 var safeMult = function(x, y) {
   x = x === undefined ? 1 : x;
   y = y === undefined ? 1 : y;
   return x * y;
 };
-
-// ES6
+</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
 var safeMult = function(x = 1, y = 1) {
   return x * y;
 };
@@ -180,26 +175,23 @@ var safeMult = function(x = 1, y = 1) {
                     </section>
                     <section>
                         <h2>Destructuring Assignment</h2>
-                        <pre><code class="js" data-trim>
-// previously
+                        <pre><code class="js" data-trim>// previously
 var aPoint = {x: 123, y: 456};
 var x = aPoint.x;
 var y = aPoint.y;
-
-// ES6
+</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
 var aPoint = {x: 123, y: 456};
 var {x, y} = aPoint;
-var {topLeft: {x: x1, y: y1}, bottomRight: {x: x2, y: y2}} = rect;
+
 var rect = {topLeft: {x: 1, y: 2}, bottomRight: {x: 3, y: 4}};
+var {topLeft: {x: x1, y: y1}, bottomRight: {x: x2, y: y2}} = rect;
 </code></pre>
                     </section>
                     <section>
                         <h2>Iterators &amp; Generators</h2>
-                        <pre><code class="js" data-trim>
-// previously
+                        <pre><code class="js" data-trim>// previously
 ...?
-
-// ES6
+</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
 function* intsBetween(min, max) {
   for (var i = min; i < max; i++) {
     yield i;
@@ -218,8 +210,7 @@ expect(result).toEqual([4, 5, 6, 7, 8, 9, 10]);
                     </section>
                     <section>
                         <h2>Modules</h2>
-                        <pre><code class="js" data-trim>
-// previously
+                        <pre><code class="js" data-trim>// previously
 var SomeLibrary = (function() {
   var internalVar = 'a';
 
@@ -229,8 +220,7 @@ var SomeLibrary = (function() {
 })();
 
 expect(SomeLibrary.externalVar).toBe('ab');
-
-// ES6
+</code></pre><div class="fragment"><pre><code class="js" data-trim>// ES6
 // (SomeLibrary.js)
 var internalVar = 'a';
 export var externalVar = internalVar + 'b';
@@ -239,12 +229,9 @@ export var externalVar = internalVar + 'b';
 import {externalVar} from './SomeLibrary';
 
 expect(externalVar).toBe('ab');
-
-</code></pre><pre><code>
-&lt;!-- loads both! --&gt;
+</code></pre><pre><code class="xml" data-trim>&lt;!-- (in index.html) loads both! --&gt;
 &lt;script type="module" src="Main.js"&gt;&lt;/script&gt;
-
-</code></pre>
+</code></pre></div>
                     </section>
                     <section>
                         <h2>Learn more</h2>
@@ -279,50 +266,35 @@ expect(externalVar).toBe('ab');
                         <p>"Separate Presentation from Business Logic"</p>
                         <ul style="list-style: none">
                         <li>
-                            <span class="fragment">"Presentation" &rarr;</span>
-                            <span class="fragment">CSS</span>
+                            <span>"Presentation" &rarr;</span>
+                            <span>CSS</span>
                         </li>
                         <li>
-                            <span class="fragment">"Business Logic" &rarr;</span>
-                            <span class="fragment">JavaScript</span>
+                            <span>"Business Logic" &rarr;</span>
+                            <span>JavaScript</span>
                         </li>
                         <li>
-                            <span class="fragment">"Structure" &rarr;</span>
-                            <span class="fragment">HTML</span>
+                            <span>"Structure" &rarr;</span>
+                            <span>HTML</span>
                         </li>
                         </ul>
                     </section>
                     <section>
-                        <h2>What do you end up with?</h2>
-                        <p>Messy HTML<pre><code class="xml" data-trim>
-<div class="popup-panel">
-  <div class="header">
-    <h2>Header Content</h2>
-    <div class="close-button">X</div>
-  </div>
-  <p class="content">Some content</p>
-</div>
-</code></pre></p>
-                    <p>There's no <em>encapsulation</em> of HTML structure...</p>
-                        <div class="fragment">
-                            <p>Wouldn't this be nicer?<pre><code class="xml" data-trim>
-<popup closeable="true" header="Header Content">
-    Some content
-</popup>
-</code></pre>
-                            </p>
-                        </div>
+                        <h2>How do we organize it?</h2>
+                        <ul>
+                            <li>Javascript in RequireJS modules</li>
+                            <li class="fragment">HTML in.... templates.. most of the time?</li>
+                            <li class="fragment">A few <em>huge</em> CSS files</li>
+                            <li class="fragment">All entangled and hard to separate</li>
+                        </ul>
                     </section>
                     <section>
-                        <h2>How do you reuse pieces of the app?</h2>
+                        <h2>Reusing HTML/CSS/JS - common questions</h2>
                         <p class="fragment roll-in">
-                            <q>&ldquo;What part of the CSS does this piece need?&rdquo;</q>
+                            <q>&ldquo;What part of the CSS does this HTML need?&rdquo;</q>
                         </p>
                         <p class="fragment roll-in">
                             <q>&ldquo;Where is the behavior for this chunk of HTML?&rdquo;</q>
-                        </p>
-                        <p class="fragment roll-in">
-                            <q>&ldquo;What's the required HTML for this library again?&rdquo;</q>
                         </p>
                         <p class="fragment roll-in">
                             <q>&ldquo;Does that behavior need other parts of my app to work?&rdquo;</q>
@@ -330,9 +302,32 @@ expect(externalVar).toBe('ab');
                         <p class="fragment roll-in">
                             <q>&ldquo;Did I import all the correct files for this library?&rdquo;</q>
                         </p>
+                        <p class="fragment roll-in">
+                            <q>&ldquo;What's the required HTML for this library again?&rdquo;</q>
+                        </p>
                     </section>
                     <section>
-                        <h1>Enter Components</h1>
+                        <h2>Using a Popup library</h2>
+                        <p>Messy HTML<pre><code class="xml">&lt;div class="popup-panel"&gt;
+  &lt;div class="header"&gt;
+    &lt;h2&gt;Header Content&lt;/h2&gt;
+    &lt;div class="close-button"&gt;X&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p class="content"&gt;Some content&lt;/p&gt;
+&lt;/div&gt;
+</code></pre></p>
+                    <p>There's no <em>encapsulation</em> of HTML structure...</p>
+                        <div class="fragment">
+                            <p>Wouldn't this be nicer?<pre>
+<code class="xml" data-trim>&lt;popup closeable="true" header="Header Content"&gt;
+    Some content
+&lt;/popup&gt;
+</code></pre>
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h1>Enter Web Components</h1>
                     </section>
                     <section>
                         <h2>Put HTML, CSS, and JavaScript all together</h2>
@@ -344,6 +339,7 @@ expect(externalVar).toBe('ab');
                             <li>What about separating presentation and business logic?
                                 <ul>
                                     <li>We're still using HTML/CSS/JS for their respective roles</li>
+                                    <li>What we really want is better organization and encapsulation</li>
                                 </ul>
                             </li>
                         </ul>
@@ -373,11 +369,10 @@ expect(externalVar).toBe('ab');
                             <li>Content can't be seen by <code>querySelector</code></li>
                             <li>Doesn't execute any scripts inside the HTML</li>
                         </ul>
-                        <p><pre><code class="xml">
-<template id="user-card">
-  <script>alert("This won't run on load!");</script>
-  <div>Content, but is hidden from normal DOM</div>
-</template>
+                        <p><pre><code class="xml">&lt;template id="user-card"&gt;
+  &lt;script&gt;alert("This won't run on load!");&lt;/script&gt;
+  &lt;div&gt;Content, but is hidden from normal DOM&lt;/div&gt;
+&lt;/template&gt;
 </code></pre></p>
                     </section>
                     <section>
@@ -390,27 +385,24 @@ expect(externalVar).toBe('ab');
                     </section>
                     <section>
                         <h2>Shadow DOM <small>(example)</small></h2>
-                        <p>Using <code>highlight.js</code> to render code in HTML<pre><code>
-var fooTheBar = function(bar) {
+                        <p>Using <code>highlight.js</code> to render code in HTML<pre><code>var fooTheBar = function(bar) {
   return 'foo' + bar;
 };
-</code></pre></p><p>view source, and you see this mess<pre><code class="xml">
-<code class="actionscript">
-<span class="keyword">var</span> fooTheBar = <span class="function">
-<span class="keyword">function</span><span class="params">(bar)</span> {</span>
-  <span class="keyword">return</span> <span class="string">'foo'</span> + bar;
+</code></pre></p><p>view source, and you see this mess<pre><code class="xml">&lt;code class="javascript"&gt;
+&lt;span class="keyword"&gt;var&lt;/span&gt; fooTheBar = &lt;span class="function"&gt;
+&lt;span class="keyword"&gt;function&lt;/span&gt;&lt;span class="params"&gt;(bar)&lt;/span&gt; {&lt;/span&gt;
+  &lt;span class="keyword"&gt;return&lt;/span&gt; &lt;span class="string"&gt;'foo'&lt;/span&gt; + bar;
 };
 </code>
 </code></pre>
                     </section>
                     <section>
                         <h2>Shadow DOM <small>(example)</small></h2>
-                        <p>With Shadow DOM, view source and see<pre><code class="xml">
-<code type="javascript">
+                        <p>With Shadow DOM, view source and see<pre><code class="xml">&lt;code type="javascript"&gt;
   var fooTheBar = function(bar) {
     return 'foo' + bar;
   };
-</code>
+&lt;/code&gt;
 </code></pre></p>
                         <ul>
                             <li>All the same markup is still there, just under the covers</li>
@@ -423,8 +415,8 @@ var fooTheBar = function(bar) {
                             <li>Can themselves have imports, which are fetched recursively</li>
                             <li>Can define styles, templates, etc</li>
                         </ul>
-                        <p><pre><code>
-&lt;link rel="import" href="header.html" id="header-import"&gt;
+                        <p><pre>
+<code class="xml" data-noescape data-trim>&lt;link rel="import" href="header.html" id="header-import"&gt;
 &lt;script&gt;
   var headerDoc = document.getElementById('header-import').import;
   headerDoc.querySelector('#some-id-in-the-header-file');
@@ -434,13 +426,12 @@ var fooTheBar = function(bar) {
                     <section>
                         <h2>Custom Elements</h2>
                         <ul>
-                            <li>Gives HTML appear to have more functionality</li>
-                            <li>Define new tags with custom behavior</li>
-                            <li>Lifecycle events to control the element</li>
-                            <li>Get events when properties change</li>
+                            <li>HTML appears to have more functionality</li>
+                            <li>Tags can have custom behavior</li>
+                            <li>Lifecycle events can control the element</li>
+                            <li>Events fire when properties change</li>
                         </ul>
-                        <p><pre><code>
-var XFooProto = Object.create(HTMLElement.prototype, {
+                        <p><pre><code class="js" data-trim>var XFooProto = Object.create(HTMLElement.prototype, {
     bar: {
       get: function() { return 5; }
     },
@@ -458,8 +449,10 @@ XFooProto.createdCallback = function() {
 var XFoo = document.registerElement('x-foo', {
   prototype: XFooProto
 });
-
 </code></pre></p>
+                    </section>
+                    <section>
+                        <h2>A little complicated...</h2>
                     </section>
 <section data-background="no-repeat center url('http://www.polymer-project.org/images/logos/p-logo.svg')">
                         <h2><a href="http://www.polymer-project.org/">Polymer</a></h2>
@@ -473,16 +466,20 @@ var XFoo = document.registerElement('x-foo', {
                     <section>
                         <h2>Polymer Custom Elements</h2>
                         <ul>
-                            <li>Gives HTML appear to have more functionality</li>
-                            <li>Define new tags with custom behavior</li>
-                            <li>Lifecycle events to control the element</li>
-                            <li>Get events when properties change</li>
+                            <li>A layer on top of the standard</li>
+                            <li>Provides a combined API for web component features</li>
+                            <li>Templating is built-in, since it's such a common use-case</li>
                         </ul>
-                        <p><pre><code>
-<polymer-element name="x-foo" attributes="bar">
-  <template>
-    <b>Testing 123!</b>
-  </template>
+                        <p><pre><code class="auto" data-noescape>
+&lt;polymer-element name="x-foo" attributes="bar"&gt;
+  &lt;style&gt;
+    .numbers {
+        color: blue;
+    }
+  &lt;/style&gt;
+  &lt;template&gt;
+    &lt;b&gt;Testing &lt;span class="numbers"&gt;123!&lt;/span&gt;&lt;/b&gt;
+  &lt;/template&gt;
   &lt;script&gt;
     Polymer('x-foo', {
       bar: 5,
@@ -491,18 +488,19 @@ var XFoo = document.registerElement('x-foo', {
       }
     });
   &lt;/script&gt;
-</polymer-element>
+&lt;/polymer-element&gt;
 </code></pre></p>
                     </section>
                     <section>
                         <h2>Some neat examples</h2>
                         <ul>
-                            <li><a href="/examples/dismissable">Raw templates</a></li>
-                            <li><a href="/examples/github">Polymer codeless JSON download into templates</a></li>
+                            <li><a href="/examples/dismissable">Raw templates and Shadow DOM</a></li>
+                            <li><a href="/examples/github">Polymer "codeless" JSON download</a></li>
                             <li><em>Note: </em> these APIs are evolving
                                 <ul>
                                     <li>Aren't standards yet</li>
-                                    <li>Need to enable settings in <code>chrome://flags</code>
+                                    <li>Polymer is only supported for "evergreen" browsers</li>
+                                    <li>Might need to enable settings in <code>chrome://flags</code>
                                         <ul>
                                             <li><a target="_window" href="chrome://flags/#enable-experimental-web-platform-features">Enable experimental Web Platform features</a></li>
                                             <li><a target="_window" href="chrome://flags/#enable-html-imports">Enable HTML Imports</a></li>
@@ -537,6 +535,53 @@ var XFoo = document.registerElement('x-foo', {
 
 		<script>
 
+        var highlightEverything = function(hljs) {
+            var hljs_nodes = document.querySelectorAll( 'pre code.auto' );
+        
+            var escapeThings = function(element) {
+                // Now escape html unless prevented by author
+                if( ! element.hasAttribute( 'data-noescape' )) {
+                    element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                }
+            };
+
+            var trimThings = function(element) {
+                // trim whitespace if data-trim attribute is present
+                if( element.hasAttribute( 'data-trim' ) && typeof element.innerHTML.trim === 'function' ) {
+                    element.innerHTML = element.innerHTML.trim();
+                }
+            };
+
+            var process = function(element) {
+                    trimThings(element);
+
+                    escapeThings(element);
+
+                    // re-highlight when focus is lost (for edited code)
+                    element.addEventListener( 'focusout', function( event ) {
+                        hljs.highlightBlock( event.currentTarget );
+                    }, false );
+            };
+
+            for( var i = 0, len = hljs_nodes.length; i < len; i++ ) {
+                process(hljs_nodes[i]);
+                hljs_nodes[i].innerHTML = hljs.highlightAuto(hljs_nodes[i].innerHTML).value;
+            }
+
+            [].forEach.call(document.querySelectorAll( 'pre code.xml' ), function(theDiv) {
+              trimThings(theDiv);
+              console.log('highlighting xml');
+              theDiv.innerHTML = hljs.highlight('xml', theDiv.innerHTML).value;
+            });
+
+            [].forEach.call(document.querySelectorAll( 'pre code.js' ), function(theDiv) {
+              trimThings(theDiv);
+              escapeThings(theDiv);
+              console.log('highlighting javascript');
+              theDiv.innerHTML = hljs.highlight('javascript', theDiv.innerHTML).value;
+            });
+        };
+
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
@@ -557,12 +602,12 @@ var XFoo = document.registerElement('x-foo', {
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+					/*{ src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+                        highlightEverything(hljs);
+                    } },*/
+                    {src: 'plugin/highlight2/highlight.pack.js', async:true, callback: function() {
                         hljs.initHighlightingOnLoad();
-                        [].forEach.call(document.querySelectorAll('div.html'), function(theDiv) {
-                            theDiv.innerHTML = hljs.highlight('xml', theDiv.innerText).value;
-                        });
-                    } },
+                    }},
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
