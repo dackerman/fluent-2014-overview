@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Components &amp; The Future of JavaScript Apps</title>
+
+		<link rel="stylesheet" href="/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="/revealjs/css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="/revealjs/lib/css/zenburn.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+                <section data-markdown="web-components.md"
+                         data-separator="^\n====\n"
+                         data-vertical="^----\n"></section>
+            </div>
+		</div>
+
+		<script src="/revealjs/lib/js/head.min.js"></script>
+		<script src="/revealjs/js/reveal.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+
+				parallaxBackgroundImage: 'img/birds.jpg',
+				parallaxBackgroundSize: '4608px 3072px',
+
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				dependencies: [
+					{ src: '/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/revealjs/plugin/notes/notes.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
