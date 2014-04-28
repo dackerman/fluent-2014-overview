@@ -1,7 +1,8 @@
 # David Ackerman's presentations
 
-Contained within:
-* A Presentation about Web Components and ES6 - an overview of the FluentConf 2014 
+Current talks:
+* /presentations/web-components
+  * Web Components and ES6 - an overview from FluentConf 2014 
 
 ## How to run
 * `npm install -g http-server`
