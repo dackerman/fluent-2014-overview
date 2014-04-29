@@ -1,0 +1,15 @@
+.pdf-icon {
+	background: url('../img/pdf-icon.svg');
+	background-size: 50px 50px;
+	cursor: pointer;
+	height: 50px;
+	opacity: 0.2;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 50px;
+}
+
+.pdf-icon:hover {
+	opacity: 1;
+}

@@ -9,6 +9,19 @@
 		<link rel="stylesheet" href="../revealjs/css/reveal.css">
 		<link rel="stylesheet" href="../revealjs/css/theme/night.css" id="theme">
 		<link rel="stylesheet" href="../revealjs/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../common/css/common.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
 	</head>
 
 	<body>
@@ -23,10 +36,30 @@
             </div>
 		</div>
 
+		<!-- Allow for pdf printing when clicked -->
+		<div class="pdf-icon" onclick="goToPdfPage()"></div>
+
 		<script src="../revealjs/lib/js/head.min.js"></script>
 		<script src="../revealjs/js/reveal.js"></script>
 
 		<script>
+
+		  var goToPdfPage = function() {
+		  	var l = document.location;
+		  	l.assign(l.origin + l.pathname + "?print-pdf");
+		  };
+
+      // The original markdown uses <a-script> in place of <script> so that
+      // it can properly be parsed by the markdown libraries. Once that is done,
+      // We go in an replace all the instances of a-script with script so the
+      // end result looks correct.
+      var markedDone = false, markdownDone = false;
+		  var scriptTagReplacer = function() {
+		  	var b = document.body;
+		  	if (markedDone && markdownDone) {
+		  		b.innerHTML = b.innerHTML.replace(/a-script/gi, "script");
+		  	 }
+		  };
 
 			Reveal.initialize({
 
@@ -40,9 +73,13 @@
 
 				dependencies: [
 					{ src: '../revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../revealjs/plugin/markdown/marked.js', condition: function() {
+						return !!document.querySelector( '[data-markdown]' );
+					}, callback: function() { markedDone = true; scriptTagReplacer(); }},
+          { src: '../revealjs/plugin/markdown/markdown.js', condition: function() {
+          	return !!document.querySelector( '[data-markdown]' );
+          }, callback: function() { markdownDone = true; scriptTagReplacer(); }},
+          { src: '../revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: '../revealjs/plugin/notes/notes.js' }
 				]
 			});
