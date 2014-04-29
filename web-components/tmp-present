@@ -1,38 +1,7 @@
                     <section>
-                        <h2>Default Parameters</h2>
-                        <pre><code class="js" data-trim>// previously
-function f(list, indexA, indexB) {
-  if (typeof indexA === 'undefined') indexA = 0;
-  if (typeof indexB === 'undefined') indexB = list.length;
-  return [list, indexA, indexB];
-}
-</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
-function f(list, indexA = 0, indexB = list.length) {
-  return [list, indexA, indexB];
-}
-expect(f([1,2,3])).to.be.eql([[1,2,3], 0, 3]);
-expect(f([1,2,3], 1)).to.be.eql([[1,2,3], 1, 3]);
-expect(f([1,2,3], 1, 2)).to.be.eql([[1,2,3], 1, 2]);
-</code></pre>
-                    </section>
-                    <section>
                         <h2>Destructuring Assignment</h2>
-                        <pre><code class="js" data-trim>// previously
-var aPoint = {x: 123, y: 456};
-var x = aPoint.x;
-var y = aPoint.y;
-
-var rect = {topLeft: {x: 1, y: 2}, bottomRight: {x: 3, y: 4}};
-var x1 = rect.topLeft.x;
-var y1 = rect.topLeft.y;
-var x2 = rect.bottomRight.x;
-var y2 = rect.bottomRight.y;
-</code></pre><pre class="fragment"><code class="js" data-trim>// ES6
-var aPoint = {x: 123, y: 456};
-var {x, y} = aPoint;
-
-var rect = {topLeft: {x: 1, y: 2}, bottomRight: {x: 3, y: 4}};
-var {topLeft: {x: x1, y: y1}, bottomRight: {x: x2, y: y2}} = rect;
+                        <pre><code class="js" data-trim>
+</code></pre><pre class="fragment"><code class="js" data-trim>
 </code></pre>
                     </section>
                     <section>
@@ -40,7 +9,7 @@ var {topLeft: {x: x1, y: y1}, bottomRight: {x: x2, y: y2}} = rect;
                         <pre><code class="js" data-trim>// previously
 ...?
 </code></pre><pre class="fragment"><code class="js" data-trim>// ES6
-function* intsBetween(min, max) {
+function* intsBetween(min, max) {des
   for (var i = min; i < max; i++) {
     yield i;
   }
