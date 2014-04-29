@@ -176,8 +176,8 @@ expect(SomeLibrary.externalVar).toBe('ab');
 
 ```html
 <!-- (in index.html) -->
-&lt;script src="SomeLibrary.js"&gt;&lt;/script&gt;
-&lt;script src="Main.js"&gt;&lt;/script&gt;
+<a-script src="SomeLibrary.js"></a-script>
+<a-script src="Main.js"></a-script>
 ```
 ```javascript
 // ES6
@@ -191,8 +191,8 @@ import {externalVar} from './SomeLibrary';
 expect(externalVar).toBe('ab');
 ```
 ```html
-&lt;!-- (in index.html) Loads SomeLibrary automatically! --&gt;
-&lt;script type="module" src="Main.js"&gt;&lt;/script&gt;
+<!-- (in index.html) Loads SomeLibrary automatically! -->
+<a-script type="module" src="Main.js"></a-script>
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
@@ -326,7 +326,163 @@ So what * **are** *
 * <a target="_window" href="http://www.html5rocks.com/en/tutorials/webcomponents/customelements">Custom Elements</a>
 
 ----
+## Templates
+* Specify blocks of HTML to be used as a template
+* Content can't be seen by `querySelector`
+* Doesn't execute any scripts inside the HTML
 
+```html
+<template id="user-card">
+  <a-script>alert("This won't run on load!");</a-script>
+  <div>Content, but is hidden from normal DOM</div>
+</template>
+```
+
+----
+## Shadow DOM
+* Separate DOM from the main one
+* Used for all the presentation-specific HTML
+* Prevents accidental overriding of CSS or unintended JavaScript
+* Leaves regular DOM nice and clean
+* Allow for HTML *encapsulation*
+
+----
+## No Shadow DOM
+
+Using `highlight.js` to render code in HTML
+
+```javascript
+var fooTheBar = function(bar) {
+  return 'foo' + bar;
+};
+```
+
+view source, and you see this mess:
+```html
+<code class="javascript"><span class="keyword">var</span> fooTheBar =
+  <span class="function">
+<span class="keyword">function</span><span class="params">(bar)</span> {</span>
+  <span class="keyword">return</span> <span class="string">'foo'</span> + bar;
+};</code>
+```
+<!-- .element: class="fragment roll-in" data-fragment-index="1" -->
+----
+## With Shadow DOM
+
+View source and see:
+```
+<code type="javascript">
+  var fooTheBar = function(bar) {
+    return 'foo' + bar;
+  };
+</code>
+```
+
+All the same markup is still there, just under the covers
+
+----
+## HTML Imports
+* Lets you fetch an HTML document like we currently do CSS or images
+* Can themselves have imports, which are fetched recursively
+* Can define styles, templates, etc
+* HTML imports become your "dependencies"
+
+```
+<link rel="import" href="header.html" id="header-import">
+<a-script>
+var headerDoc = document.getElementById('header-import').import;
+  headerDoc.querySelector('#some-id-in-the-header-file');
+</a-script>
+```
+
+----
+## Custom Elements
+* Ties everything together
+* Tags can have custom behavior
+* Indistinguishable from native elements like `<input>`
+* Lifecycle events can control the element
+* Events fire when properties change
+
+```javascript
+var XFooProto = Object.create(HTMLElement.prototype, {
+    bar: {
+      get: function() { return 5; }
+    },
+    foo: {
+      value: function() {
+        alert('foo() called');
+      }
+    }
+  });
+
+XFooProto.createdCallback = function() {
+  this.innerHTML = "<b>Testing 123!</b>";
+};
+
+var XFoo = document.registerElement('x-foo', {
+  prototype: XFooProto
+});
+```
+
+----
+## A little complicated...
+
+----
+<!-- .slide: data-background="no-repeat center url('http://www.polymer-project.org/images/logos/p-logo.svg')" -->
+## <a href="http://www.polymer-project.org/">Polymer</a>
+* Library putting all these technologies together
+* Works as a polyfill for tech until it's a standard
+* Library shrinks as more standards are implemented
+* Makes these standards easier to use
+
+----
+## Polymer Custom Elements
+* A layer on top of the standard
+* Provides a combined API for web component features
+* Templating is built-in, since it's such a common use-case
+
+```
+<polymer-element name="x-foo" attributes="bar">
+  <style>
+    .numbers {
+        color: blue;
+    }
+  </style>
+  <template>
+    <b>Testing <span class="numbers">123!</span></b>
+  </template>
+  <a-script>
+    Polymer('x-foo', {
+      bar: 5,
+      foo: function() {
+        alert('foo() called');
+      }
+    });
+  </a-script>
+</polymer-element>
+```
+----
+## Some neat examples
+
+###<a href="/examples/dismissable">Raw templates and Shadow DOM</a>
+
+###<a href="/examples/github">Polymer "codeless" JSON download</a>
+
+* *Note: * these APIs are evolving
+  * Aren't standards yet
+  * Polymer is only supported for "evergreen" browsers
+  * Might need to enable settings in <code>chrome://flags</code>
+    * <a target="_window" href="chrome://flags/#enable-experimental-web-platform-features">Enable experimental Web Platform features</a>
+    * <a target="_window" href="chrome://flags/#enable-html-imports">Enable HTML Imports</a>
+
+----
+## Wrap Up
+* FluentConf was awesome
+* New tech is exciting!
+* Can't use it in serious apps yet
+* But, it's good to be prepared!
+
+### Now <!-- .element: class="fragment" data-fragment-index="1" --> you too can be a **Web Components hipster!** 
 
 ----
 ## Questions?
